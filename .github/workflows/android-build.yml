@@ -30,6 +30,9 @@ jobs:
 
       - name: ensure environment
         run: sudo apt install make automake libtool pkg-config cmake git golang-go
-      
+      - name: install asdf
+        run: go install github.com/asdf-vm/asdf/cmd/asdf@v0.18.0
+      - name: install flutter
+        run: asdf install
       - name: Build with flutter
         run: flutter build apk --debug
