@@ -29,7 +29,7 @@ jobs:
 
 
       - name: ensure environment
-        run: apt install make automake libtool pkg-config cmake git
+        run: sudo apt install make automake libtool pkg-config cmake git
       - name: install flutter
         run: asdf install
       - name: Build with flutter
