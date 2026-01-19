@@ -1,0 +1,36 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: build apps
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Note: This workflow uses the latest stable version of the Dart SDK.
+      # You can specify other versions if desired, see documentation here:
+      # https://github.com/dart-lang/setup-dart/blob/main/README.md
+      # - uses: dart-lang/setup-dart@v1
+      - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
+
+      - name: set up JDK 11
+        uses: actions/setup-java@v4
+        with:
+            java-version: '11'
+            distribution: 'temurin'
+            cache: gradle
+
+
+      - name: ensure environment
+        run: apt install make automake libtool pkg-config cmake git
+      - name: install flutter
+        run: asdf install
+      - name: Build with flutter
+        run: flutter build apk --debug
